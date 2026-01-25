@@ -1,0 +1,89 @@
+<!DOCTYPE html> 
+<html>
+<head>
+    <title>The Reserved Mug Poll</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        /* --- YOUR CSS GOES HERE --- */
+        :root { --accent: #3A5A40; --bg: #F9F7F2; --text: #344E41; }
+        body { font-family: -apple-system, sans-serif; background-color: var(--bg); display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; overflow: hidden; }
+        .card { background: white; padding: 3rem; border-radius: 40px; box-shadow: 0 15px 35px rgba(0,0,0,0.07); width: 85%; max-width: 480px; text-align: center; }
+        .pilot-header { color: var(--accent); font-weight: 800; text-transform: uppercase; letter-spacing: 2px; font-size: 0.8rem; margin-bottom: 0.5rem; }
+        h1 { font-size: 2.2rem; color: var(--text); margin: 0 0 1.5rem 0; }
+        .feature-box { background: #F1F3ED; padding: 1.5rem; border-radius: 25px; margin-bottom: 2rem; font-size: 1.2rem; color: #588157; text-align: left; }
+        .feature-item { display: flex; align-items: flex-start; margin-bottom: 8px; }
+        .dot { color: var(--accent); margin-right: 12px; font-weight: bold; }
+        .main-question { font-size: 1.6rem; font-weight: 700; color: var(--text); margin-bottom: 2rem; }
+        .btn-row { display: flex; justify-content: center; gap: 30px; }
+        .vote-btn { width: 200px; height: 200px; border-radius: 50%; border: none; cursor: pointer; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: all 0.2s ease; box-shadow: 0 8px 20px rgba(0,0,0,0.1); }
+        .yes-btn { background: var(--accent); color: white; }
+        .no-btn { background: #DAD7CD; color: #588157; }
+        .emoji { font-size: 3.5rem; line-height: 1; }
+        .label { font-size: 1rem; font-weight: 800; letter-spacing: 1px; margin-top: 5px; }
+        .hidden { display: none; }
+        details { position: fixed; bottom: 30px; width: 100%; text-align: center; }
+        summary { color: #A3B18A; font-size: 0.8rem; opacity: 0.4; cursor: pointer; list-style: none; }
+        .log { background: white; padding: 20px; border-radius: 15px; margin: 10px auto; width: 200px; box-shadow: 0 -5px 25px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body>
+
+    <div class="card" id="q">
+        <div class="pilot-header">Proposed Pilot Program</div>
+        <h1>The Reserved Mug</h1>
+        <div class="feature-box">
+            <div class="feature-item"><span class="dot">✓</span> A Rez-branded mug that lives here</div>
+            <div class="feature-item"><span class="dot">✓</span> We wash it and store it</div>
+            <div class="feature-item"><span class="dot">✓</span> Ready when you arrive</div>
+        </div>
+        <div class="main-question">Would you use this?</div>
+        <div class="btn-row">
+            <button onclick="v('Yes')" class="vote-btn yes-btn">
+                <span class="emoji">☕️</span>
+                <span class="label">YES</span>
+            </button>
+            <button onclick="v('No')" class="vote-btn no-btn">
+                <span class="emoji">👎</span>
+                <span class="label">NO</span>
+            </button>
+        </div>
+    </div>
+
+    <div class="card hidden" id="t">
+        <div style="font-size: 5rem; margin-bottom: 1rem;">✨</div>
+        <h1>Thank You!</h1>
+        <p style="font-size: 1.2rem; color: #588157;">Your interest helps us decide.</p>
+    </div>
+
+    <details id="stats-panel">
+        <summary id="stats-summary">View Stats (0)</summary>
+        <div class="log">
+            <div id="s" style="font-weight:bold; font-size: 1.2rem;">Yes: 0 | No: 0</div>
+        </div>
+    </details>
+
+    <script>
+        /* --- YOUR JS GOES HERE --- */
+        function v(choice) {
+            const d = JSON.parse(localStorage.getItem('poll_data') || '[]');
+            d.push({ choice, time: new Date().toISOString() });
+            localStorage.setItem('poll_data', JSON.stringify(d));
+            document.getElementById('q').classList.add('hidden');
+            document.getElementById('t').classList.remove('hidden');
+            show();
+            setTimeout(() => {
+                document.getElementById('t').classList.add('hidden');
+                document.getElementById('q').classList.remove('hidden');
+            }, 3000); 
+        }
+        function show() {
+            const d = JSON.parse(localStorage.getItem('poll_data') || '[]');
+            const y = d.filter(x => x.choice === 'Yes').length;
+            const n = d.filter(x => x.choice === 'No').length;
+            document.getElementById('s').innerText = `Yes: ${y} | No: ${n}`;
+            document.getElementById('stats-summary').innerText = `View Stats (${d.length})`;
+        }
+        show();
+    </script>
+</body>
+</html> 
