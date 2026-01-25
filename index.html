@@ -165,6 +165,23 @@
       color: #588157;
       font-weight: 700;
     }
+
+    .reset-btn {
+      width: 100%;
+      margin-top: 12px;
+      padding: 10px 12px;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: #F1F3ED;
+      color: #588157;
+      font-weight: 900;
+      letter-spacing: 0.5px;
+    }
+
+    .reset-btn:active {
+      transform: scale(0.99);
+    }
   </style>
 </head>
 
@@ -207,8 +224,11 @@
 
   <!-- STATS -->
   <details>
-    <summary id="stats-summary">View Stats (0)</summary>
-    <div class="log" id="stats"></div>
+    <summary id="stats-summary">View Stats</summary>
+    <div class="log">
+      <div id="stats"></div>
+      <button class="reset-btn" onclick="resetStats()">Reset Stats</button>
+    </div>
   </details>
 
   <script>
@@ -230,6 +250,13 @@
       }, 2500);
     }
 
+    function resetStats() {
+      const ok = confirm('Reset stats on this device?');
+      if (!ok) return;
+      localStorage.removeItem(KEY);
+      updateStats();
+    }
+
     function updateStats() {
       const data = JSON.parse(localStorage.getItem(KEY) || '[]');
       const ceramic = data.filter(d => d.choice === 'Ceramic Mug').length;
@@ -239,10 +266,9 @@
       document.getElementById('stats').innerHTML =
         `Ceramic: ${ceramic}<br>` +
         `Insulated: ${insulated}<br>` +
-        `Skip: ${skip}<br><hr>Total: ${data.length}`;
+        `Skip: ${skip}`;
 
-      document.getElementById('stats-summary').innerText =
-        `View Stats (${data.length})`;
+      document.getElementById('stats-summary').innerText = 'View Stats';
     }
 
     updateStats();
