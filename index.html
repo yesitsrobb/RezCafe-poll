@@ -61,15 +61,8 @@
       font-size: 1.1rem;
     }
 
-    .feature-item {
-      display: flex;
-      margin-bottom: 8px;
-    }
-
-    .dot {
-      margin-right: 12px;
-      font-weight: bold;
-    }
+    .feature-item { display: flex; margin-bottom: 8px; }
+    .dot { margin-right: 12px; font-weight: bold; color: #3A5A40; }
 
     .question {
       font-size: 1.55rem;
@@ -106,19 +99,14 @@
       box-shadow: 0 6px 14px rgba(0,0,0,0.15);
     }
 
-    .ceramic {
-      background: var(--ceramic-bg);
-    }
-
-    .insulated {
-      background: var(--insulated-bg);
-    }
+    .ceramic { background: var(--ceramic-bg); }
+    .insulated { background: var(--insulated-bg); }
 
     .mug-img {
       width: 110px;
       height: 110px;
       object-fit: contain;
-      opacity: 0.9;
+      opacity: 0.95;
       filter: grayscale(100%);
       margin-bottom: 12px;
     }
@@ -143,9 +131,7 @@
       user-select: none;
     }
 
-    .hidden {
-      display: none;
-    }
+    .hidden { display: none; }
 
     .thanks {
       font-size: 5rem;
@@ -165,6 +151,7 @@
       opacity: 0.35;
       cursor: pointer;
       list-style: none;
+      user-select: none;
     }
 
     .log {
@@ -198,12 +185,12 @@
 
     <div class="btn-row">
       <button class="vote-btn ceramic" onclick="vote('Ceramic Mug')">
-        <img class="mug-img" src="ceramic-mug-v2.png" alt="Ceramic mug sketch">
+        <img class="mug-img" src="ceramic mug.png?v=2" alt="Ceramic mug sketch">
         <div class="label">Classic<br>Ceramic Mug</div>
       </button>
 
       <button class="vote-btn insulated" onclick="vote('Insulated Mug')">
-        <img class="mug-img" src="insulated-mug-v2.png" alt="Insulated mug sketch">
+        <img class="mug-img" src="insulated mug.png?v=2" alt="Insulated mug sketch">
         <div class="label">Insulated Mug<br>with Lid</div>
       </button>
     </div>
