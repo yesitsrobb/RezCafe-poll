@@ -1,8 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>The Reserved Mug Poll</title>
+  <title>The Reserved Mug – Week 2</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <style>
     :root {
       --accent: #3A5A40;
@@ -79,7 +80,7 @@
       display: flex;
       gap: 26px;
       justify-content: center;
-      margin-bottom: 1.5rem;
+      margin-bottom: 1.75rem;
       flex-wrap: wrap;
     }
 
@@ -96,6 +97,7 @@
       box-shadow: 0 8px 20px rgba(0,0,0,0.1);
       transition: transform 0.12s ease, box-shadow 0.12s ease;
       user-select: none;
+      background: #F3F5EF;
     }
 
     .vote-btn:active {
@@ -103,20 +105,13 @@
       box-shadow: 0 6px 16px rgba(0,0,0,0.12);
     }
 
-    .ceramic {
-      background: var(--accent);
-      color: #fff;
-    }
-
-    .insulated {
-      background: #DAD7CD;
-      color: #588157;
-    }
-
-    .emoji {
-      font-size: 3.2rem;
-      margin-bottom: 10px;
-      line-height: 1;
+    .mug-img {
+      width: 110px;
+      height: 110px;
+      object-fit: contain;
+      opacity: 0.8;
+      filter: grayscale(100%);
+      margin-bottom: 12px;
     }
 
     .label {
@@ -125,15 +120,8 @@
       letter-spacing: 1px;
       text-transform: uppercase;
       line-height: 1.15;
+      color: var(--text);
       text-align: center;
-    }
-
-    .pricing-note {
-      font-size: 0.85rem;
-      color: var(--muted);
-      opacity: 0.6;
-      font-style: italic;
-      margin-top: 14px;
     }
 
     .skip {
@@ -150,7 +138,7 @@
       display: none;
     }
 
-    .thanks-emoji {
+    .thanks {
       font-size: 5rem;
       margin-bottom: 1rem;
     }
@@ -186,7 +174,7 @@
 
 <body>
 
-  <!-- Week 2 Question -->
+  <!-- Question -->
   <div class="card" id="q">
     <div class="pilot-header">Proposed Pilot Program</div>
     <h1>The Reserved Mug</h1>
@@ -200,25 +188,23 @@
     <div class="question">Which option would you choose?</div>
 
     <div class="btn-row">
-      <button class="vote-btn ceramic" onclick="vote('Classic Ceramic Mug')">
-        <div class="emoji">☕️</div>
+      <button class="vote-btn" onclick="vote('Ceramic Mug')">
+        <img class="mug-img" src="images/ceramic mug.png" alt="Ceramic mug sketch">
         <div class="label">Classic<br>Ceramic Mug</div>
       </button>
 
-      <button class="vote-btn insulated" onclick="vote('Insulated Mug with Lid')">
-        <div class="emoji">♨️</div>
+      <button class="vote-btn" onclick="vote('Insulated Mug')">
+        <img class="mug-img" src="images/insulated mug.png" alt="Insulated mug sketch">
         <div class="label">Insulated Mug<br>with Lid</div>
       </button>
     </div>
-
-    <div class="pricing-note">Pricing details not finalized</div>
 
     <div class="skip" onclick="vote('Skip')">I’d probably skip this</div>
   </div>
 
   <!-- Thank You -->
   <div class="card hidden" id="t">
-    <div class="thanks-emoji">✨</div>
+    <div class="thanks">✨</div>
     <h1>Thank you!</h1>
     <p style="color:#588157;font-size:1.2rem;">Your input helps us decide.</p>
   </div>
@@ -250,8 +236,8 @@
 
     function updateStats() {
       const data = JSON.parse(localStorage.getItem(KEY) || '[]');
-      const ceramic = data.filter(d => d.choice === 'Classic Ceramic Mug').length;
-      const insulated = data.filter(d => d.choice === 'Insulated Mug with Lid').length;
+      const ceramic = data.filter(d => d.choice === 'Ceramic Mug').length;
+      const insulated = data.filter(d => d.choice === 'Insulated Mug').length;
       const skip = data.filter(d => d.choice === 'Skip').length;
 
       document.getElementById('stats').innerHTML =
