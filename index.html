@@ -6,10 +6,13 @@
 
   <style>
     :root {
-      --accent: #3A5A40;
       --bg: #F9F7F2;
       --text: #344E41;
       --muted: #9AA48E;
+
+      /* Button colors */
+      --ceramic-bg: #E6DED2;     /* warm, stone */
+      --insulated-bg: #D6E0E6;   /* cool, steel */
     }
 
     body {
@@ -34,11 +37,11 @@
     }
 
     .pilot-header {
-      color: var(--accent);
       font-size: 0.8rem;
       letter-spacing: 2px;
       font-weight: 800;
       text-transform: uppercase;
+      color: #3A5A40;
       margin-bottom: 0.5rem;
     }
 
@@ -65,7 +68,6 @@
 
     .dot {
       margin-right: 12px;
-      color: var(--accent);
       font-weight: bold;
     }
 
@@ -88,28 +90,35 @@
       width: 210px;
       height: 210px;
       border-radius: 50%;
-      border: none;
+      border: 2px solid rgba(0,0,0,0.08);
       cursor: pointer;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      box-shadow: 0 10px 22px rgba(0,0,0,0.12);
       transition: transform 0.12s ease, box-shadow 0.12s ease;
       user-select: none;
-      background: #F3F5EF;
     }
 
     .vote-btn:active {
-      transform: scale(0.98);
-      box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+      transform: scale(0.97);
+      box-shadow: 0 6px 14px rgba(0,0,0,0.15);
+    }
+
+    .ceramic {
+      background: var(--ceramic-bg);
+    }
+
+    .insulated {
+      background: var(--insulated-bg);
     }
 
     .mug-img {
       width: 110px;
       height: 110px;
       object-fit: contain;
-      opacity: 0.8;
+      opacity: 0.9;
       filter: grayscale(100%);
       margin-bottom: 12px;
     }
@@ -188,13 +197,13 @@
     <div class="question">Which option would you choose?</div>
 
     <div class="btn-row">
-      <button class="vote-btn" onclick="vote('Ceramic Mug')">
-        <img class="mug-img" src="ceramic mug.png" alt="Ceramic mug sketch">
+      <button class="vote-btn ceramic" onclick="vote('Ceramic Mug')">
+        <img class="mug-img" src="ceramic-mug-v2.png" alt="Ceramic mug sketch">
         <div class="label">Classic<br>Ceramic Mug</div>
       </button>
 
-      <button class="vote-btn" onclick="vote('Insulated Mug')">
-        <img class="mug-img" src="insulated mug.png" alt="Insulated mug sketch">
+      <button class="vote-btn insulated" onclick="vote('Insulated Mug')">
+        <img class="mug-img" src="insulated-mug-v2.png" alt="Insulated mug sketch">
         <div class="label">Insulated Mug<br>with Lid</div>
       </button>
     </div>
